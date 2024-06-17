@@ -47,7 +47,7 @@ impl<R: BufRead> Decoder<'static, R> {
 }
 impl<'a, R: BufRead> Decoder<'a, R> {
     /// Creates a new decoder which employs the provided context for deserialization.
-    pub fn with_context<'b: 'a>(reader: R, context: &'a mut zstd_safe::DCtx<'b>) -> Self {
+    pub fn with_context(reader: R, context: &'a mut zstd_safe::DCtx<'static>) -> Self {
         Self { reader: zio::Reader::new(reader, raw::Decoder::with_context(context)) }
     }
 
